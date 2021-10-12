@@ -24,7 +24,14 @@ class TodoController extends Controller
     }
   
     public function getTask($id) {
-
+        if (Task::where('id', $id)->exists()) {
+            $task = Task::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($task, 200);
+        } else {
+            return response()->json([
+                "message" => "Task not found"
+            ], 404);
+        }
     }
   
     public function updateTask(Request $request, $id) {
