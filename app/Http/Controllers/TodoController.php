@@ -35,7 +35,21 @@ class TodoController extends Controller
     }
   
     public function updateTask(Request $request, $id) {
-
+        if (Task::where('id', $id)->exists()) {
+            $task = Task::find($id);
+            $task->taskName = is_null($request->taskName) ? $task->taskName : $request->taskName;
+            $task->isComplete = is_null($request->isComplete) ? $task->isComplete : $request->isComplete;
+            $task->save();
+    
+            return response()->json([
+                "message" => "record updated successfully"
+            ], 200);
+            } else {
+            return response()->json([
+                "message" => "Task not found"
+            ], 404);
+            
+        }
     }
 
     public function deleteTask($id) {
