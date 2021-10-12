@@ -42,7 +42,7 @@ class TodoController extends Controller
             $task->save();
     
             return response()->json([
-                "message" => "record updated successfully"
+                "message" => "Task updated successfully"
             ], 200);
             } else {
             return response()->json([
@@ -53,6 +53,17 @@ class TodoController extends Controller
     }
 
     public function deleteTask($id) {
-
+        if(Task::where('id', $id)->exists()) {
+            $task = Task::find($id);
+            $task->delete();
+    
+            return response()->json([
+              "message" => "Task deleted"
+            ], 202);
+          } else {
+            return response()->json([
+              "message" => "Task not found"
+            ], 404);
+          }
     }
 }
