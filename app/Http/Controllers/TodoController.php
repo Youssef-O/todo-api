@@ -11,7 +11,14 @@ class TodoController extends Controller
     }
   
     public function createTask(Request $request) {
+        $task = new Task();
+        $task->taskName = $request->taskName;
+        $task->isComplete = $request->isComplete;
+        $task->save();
 
+        return response()->json([
+            'message' => 'task record created'
+        ], 201);
     }
   
     public function getTask($id) {
