@@ -18,8 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('tasks', 'TodoController@getAllTasks');
-Route::get('task/{id}', 'TodoController@getTask');
-Route::post('task', 'TodoController@createTask');
-Route::put('task/{id}', 'TodoController@updateTask');
-Route::delete('task/{id}','TodoController@deleteTask');
+Route::get('tasks', 'App\Http\Controllers\TodoController@getAllTasks');
+Route::get('task/{id}', 'App\Http\Controllers\TodoController@getTask');
+Route::post('task', 'App\Http\Controllers\TodoController@createTask');
+Route::put('task/{id}', 'App\Http\Controllers\TodoController@updateTask');
+Route::delete('task/{id}','App\Http\Controllers\TodoController@deleteTask');

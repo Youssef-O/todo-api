@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 class TodoController extends Controller
 {
     public function getAllTasks() {
-
+        $tasks = Task::get()->toJson(JSON_PRETTY_PRINT);
+        return response($tasks, 200);
     }
   
     public function createTask(Request $request) {
